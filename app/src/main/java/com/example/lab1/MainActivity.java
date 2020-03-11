@@ -7,7 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -18,6 +21,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    String appState;
     ListView listView;
     String[] hamNames = {"Lil Ham", "Jack Sparrow", "Ninja", "Woof", "Speedy", "Sushi"};
     String[] hamDetails = {"About Lil Ham", "About Jack Sparrow", "About Ninja", "About Woof", "About Speedy", "About Sushi"};
@@ -26,9 +30,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         listView = findViewById(R.id.listView);
+        registerForContextMenu(listView);
 
         MyAdapter myAdapter = new MyAdapter(this, hamNames, hamDetails, hamImages);
         listView.setAdapter(myAdapter);
@@ -43,6 +49,38 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Log.d("MainActivity", "onCreate");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("MainActivity", "onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("MainActivity", "onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("MainActivity", "onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("MainActivity", "onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("MainActivity", "onDestroy");
     }
 
     class MyAdapter extends ArrayAdapter<String> {
@@ -76,5 +114,13 @@ public class MainActivity extends AppCompatActivity {
 
             return row;
         }
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.item_menu, menu);
     }
 }
