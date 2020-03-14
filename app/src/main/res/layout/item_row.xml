@@ -8,6 +8,8 @@
 
     <ImageView
         android:id="@+id/image"
+        android:longClickable="true"
+        android:Clickable="true"
         android:layout_width="171dp"
         android:layout_height="126dp"
         android:src="@mipmap/ic_launcher" />
@@ -20,6 +22,7 @@
 
         <TextView
             android:id="@+id/text1"
+            android:longClickable="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -29,6 +32,7 @@
 
         <TextView
             android:id="@+id/text2"
+            android:longClickable="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"

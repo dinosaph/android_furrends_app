@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -21,7 +22,6 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    String appState;
     ListView listView;
     String[] hamNames = {"Lil Ham", "Jack Sparrow", "Ninja", "Woof", "Speedy", "Sushi"};
     String[] hamDetails = {"About Lil Ham", "About Jack Sparrow", "About Ninja", "About Woof", "About Speedy", "About Sushi"};
@@ -49,6 +49,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+//        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//            @Override
+//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//                Log.v("long clicked","pos: " + position);
+//                currentPos = position;
+//                return true;
+//            }
+//        });
 
         Log.d("MainActivity", "onCreate");
     }
@@ -122,5 +132,48 @@ public class MainActivity extends AppCompatActivity {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.item_menu, menu);
+
+        Log.d("MainActivity", "onCreateContextMenu: CREATED MENU");
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_adopt:
+                // first action code
+                return true;
+            case R.id.action_donate:
+                // second action code
+                return true;
+            case R.id.action_share:
+                // Sharing hamster text data to external apps
+                shareHamster(item);
+                return true;
+
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
+    public void shareHamster(MenuItem item) {
+
+        AdapterView.AdapterContextMenuInfo menuInfo;
+        menuInfo = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+        int currentHammy = menuInfo.position;
+        Log.d("MainActivity", "onContextItemSelected: " + currentHammy);
+
+        String shareText = "Check out " + hamNames[currentHammy] + ". It's a cute hamster that needs a home. Can you help? Download Furrends from Google Store and adopt.";
+        Intent sendIntent = new Intent(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TITLE, "Sharing bits of fluffiness");
+        sendIntent.putExtra(Intent.EXTRA_TEXT, shareText);
+        sendIntent.setType("text/plain");
+        Intent shareIntent = Intent.createChooser(sendIntent, null);
+        startActivity(shareIntent);
+    }
+
+    public void sendAdoptionMail(MenuItem item) {
+
+
+
     }
 }
