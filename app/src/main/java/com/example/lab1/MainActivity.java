@@ -2,9 +2,11 @@ package com.example.lab1;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +21,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
             "- 1 month old\n- Roborowski\n- white\n- very small and cuddly\n- it likes to sleep a lot\n- it also likes to travel a lot and design its home very often\n- it's always busy"
     };
     int[] hamImages = {R.drawable.lil_ham, R.drawable.jack_sparrow, R.drawable.ninja, R.drawable.woof, R.drawable.speedy, R.drawable.sushi};
+    String[] hamDonateChoices = {"Food", "Snacks", "Toys", "Hygiene", "Hideouts"};
+    ArrayList<Integer> userChoices = new ArrayList<>();
+    boolean[] checkedDonations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,15 +65,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//                Log.v("long clicked","pos: " + position);
-//                currentPos = position;
-//                return true;
-//            }
-//        });
+        checkedDonations = new boolean[hamDonateChoices.length];
 
         Log.d("MainActivity", "onCreate");
     }
@@ -113,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
             this.rTitle = title;
             this.rDescription = description;
             this.rImgs = imgs;
-
         }
 
         @NonNull
@@ -151,7 +150,8 @@ public class MainActivity extends AppCompatActivity {
                 startAdoptionRequest(item);
                 return true;
             case R.id.action_donate:
-                // second action code
+                // This opens up donation choices dialog
+                showDonationChoices();
                 return true;
             case R.id.action_share:
                 // Sharing hamster text data to external apps
@@ -189,5 +189,60 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), AdoptionActivity.class);
         intent.putExtra("hamName", hamNames[currentHammy]);
         startActivity(intent);
+    }
+
+    public void showDonationChoices() {
+
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
+        mBuilder.setTitle("Accepted donations:");
+        mBuilder.setMultiChoiceItems(hamDonateChoices, checkedDonations, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int position, boolean isChecked) {
+                if(isChecked){
+                    if(! userChoices.contains(position)) {
+                        userChoices.add(position);
+                    } else if (userChoices.contains(position)) {
+                        userChoices.remove(position);
+                    }
+                }
+            }
+        });
+
+        mBuilder.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String donations = "";
+                for (int i = 0; i < userChoices.size(); i++) {
+                    donations += hamDonateChoices[userChoices.get(i)];
+                    if (i != userChoices.size() - 1) {
+                        donations += ", ";
+                    }
+                }
+
+                userChoices.clear();
+                for (int i = 0; i < checkedDonations.length; i++) {
+                    checkedDonations[i] = false;
+                }
+
+                String msg = "You opted for the following donations:\n" + donations;
+                Toast toast = Toast.makeText(MainActivity.this, msg, (int) 1.5);
+                toast.show();
+                checkedDonations = new boolean[hamDonateChoices.length];
+            }
+        });
+
+        mBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int position) {
+                userChoices.clear();
+                for (int i = 0; i < checkedDonations.length; i++) {
+                    checkedDonations[i] = false;
+                }
+                dialogInterface.dismiss();
+            }
+        });
+
+        AlertDialog donateDialog = mBuilder.create();
+        donateDialog.show();
     }
 }
