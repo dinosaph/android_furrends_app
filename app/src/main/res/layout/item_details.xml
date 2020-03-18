@@ -9,30 +9,32 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="125dp"
+        android:layout_height="118dp"
         android:background="#64E053"
         android:minHeight="150dp"
         android:theme="?attr/actionBarTheme"
         app:maxButtonHeight="150dp"
-        app:navigationIcon="@drawable/furrends"
-        />
+        app:navigationIcon="@drawable/furrends" />
 
     <ImageView
         android:id="@+id/imageBig"
         android:layout_width="match_parent"
-        android:layout_height="387dp"
+        android:layout_height="254dp"
         tools:srcCompat="@tools:sample/avatars[3]" />
 
     <TextView
         android:id="@+id/details1"
         android:layout_width="match_parent"
-        android:layout_height="68dp"
+        android:layout_height="54dp"
+        android:gravity="center"
         android:textSize="25sp" />
 
     <TextView
         android:id="@+id/details2"
         android:layout_width="match_parent"
-        android:layout_height="137dp"
+        android:layout_height="200dp"
+        android:paddingLeft="10sp"
+        android:paddingRight="10sp"
         android:textSize="20sp" />
 
 

@@ -24,7 +24,14 @@ public class MainActivity extends AppCompatActivity {
 
     ListView listView;
     String[] hamNames = {"Lil Ham", "Jack Sparrow", "Ninja", "Woof", "Speedy", "Sushi"};
-    String[] hamDetails = {"About Lil Ham", "About Jack Sparrow", "About Ninja", "About Woof", "About Speedy", "About Sushi"};
+    String[] hamDetails = {
+            "- 1 month old\n- Campbell\n- gray\n- always wants to play\n- very friendly with humans\n- food is its best friend\n- take care, hamsters can become obese",
+            "- 2 months old\n- wild Russian hamster (tamed)\n- classic red, black and white\n- take care, it still needs some training\n- don't adopt if you have kids, it can bite pretty badly\n- not very emotionally available",
+            "- 1.5 months old\n- Syrian\n- white and orange\n- eats and plays a lot\n- it squeaks from time to time, it likes to communicate with humans\n- this kind of hamster lives alone\n- hides often, disappears like a ninja",
+            "- 3 weeks old\n- Campbell\n- beige\n- likes to bathe in sand and drink lots of water\n- craves lots of attention from owner\n- very cuddly, it sleeps in hand\n- sometimes it makes some bark like sounds to get attention",
+            "- 2.5 weeks old\n- Campbell\n- gray and white\n- he gotta go fast everywhere, like sonic\n- he is very fast and very friendly\n- likes to jump from hand to hand and do other parkour-like things",
+            "- 1 month old\n- Roborowski\n- white\n- very small and cuddly\n- it likes to sleep a lot\n- it also likes to travel a lot and design its home very often\n- it's always busy"
+    };
     int[] hamImages = {R.drawable.lil_ham, R.drawable.jack_sparrow, R.drawable.ninja, R.drawable.woof, R.drawable.speedy, R.drawable.sushi};
 
     @Override
@@ -140,7 +147,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onContextItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_adopt:
-                // first action code
+                // This opens up the adoption activity
+                startAdoptionRequest(item);
                 return true;
             case R.id.action_donate:
                 // second action code
@@ -171,9 +179,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(shareIntent);
     }
 
-    public void sendAdoptionMail(MenuItem item) {
+    public void startAdoptionRequest(MenuItem item) {
 
+        AdapterView.AdapterContextMenuInfo menuInfo;
+        menuInfo = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+        int currentHammy = menuInfo.position;
+        Log.d("MainActivity", "onContextItemSelected: " + currentHammy);
 
-
+        Intent intent = new Intent(getApplicationContext(), AdoptionActivity.class);
+        intent.putExtra("hamName", hamNames[currentHammy]);
+        startActivity(intent);
     }
 }

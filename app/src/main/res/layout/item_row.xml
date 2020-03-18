@@ -2,14 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="150sp"
     android:padding="16dp"
     >
 
     <ImageView
         android:id="@+id/image"
         android:longClickable="true"
-        android:Clickable="true"
         android:layout_width="171dp"
         android:layout_height="126dp"
         android:src="@mipmap/ic_launcher" />

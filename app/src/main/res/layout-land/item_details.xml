@@ -6,54 +6,77 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar2"
-        android:layout_width="731dp"
-        android:layout_height="121dp"
-        android:background="#7CDD6D"
-        android:minHeight="150dp"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:maxButtonHeight="150dp"
-        app:navigationIcon="@drawable/furrends" />
-
-    <ImageView
-        android:id="@+id/imageBig"
-        android:layout_width="332dp"
-        android:layout_height="276dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="9dp"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/details2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2"
-        tools:srcCompat="@tools:sample/avatars[3]" />
-
-    <TextView
-        android:id="@+id/details2"
-        android:layout_width="391dp"
-        android:layout_height="96dp"
-        android:layout_marginTop="10dp"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@id/imageBig"
-        app:layout_constraintTop_toBottomOf="@id/toolbar2" />
-
-    <TextView
-        android:id="@+id/details1"
-        android:layout_width="391dp"
-        android:layout_height="179dp"
-        android:textSize="25sp"
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@id/imageBig"
-        app:layout_constraintTop_toBottomOf="@+id/details2"
-        app:layout_constraintVertical_bias="0.936" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar2"
+                android:layout_width="738dp"
+                android:layout_height="121dp"
+                android:background="#7CDD6D"
+                android:minHeight="150dp"
+                android:theme="?attr/actionBarTheme"
+                app:layout_constraintBottom_toTopOf="@+id/imageBig"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:maxButtonHeight="150dp"
+                app:navigationIcon="@drawable/furrends" />
+
+            <ImageView
+                android:id="@+id/imageBig"
+                android:layout_width="722dp"
+                android:layout_height="270dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginEnd="7dp"
+                app:layout_constraintBottom_toTopOf="@id/details1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/toolbar2"
+                tools:srcCompat="@tools:sample/avatars[3]" />
+
+            <TextView
+                android:id="@+id/details1"
+                android:layout_width="722dp"
+                android:layout_height="99dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="8dp"
+                android:textSize="25sp"
+                android:gravity="center"
+                app:layout_constraintBottom_toTopOf="@+id/details2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageBig" />
+
+            <TextView
+                android:id="@+id/details2"
+                android:layout_width="721dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:layout_marginEnd="8dp"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar3"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:background="#7CDD6D"
+        android:minHeight="150dp"
+        android:theme="?attr/actionBarTheme"
+        app:maxButtonHeight="150dp"
+        app:navigationIcon="@drawable/furrends" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView_chosenHamster"
+                android:layout_width="match_parent"
+                android:layout_height="40sp"
+                android:text="TextView"
+                android:textSize="20sp" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEditText_name"
+                android:layout_width="match_parent"
+                android:layout_height="45sp"
+                android:hint="Type your name" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEditText_age"
+                android:layout_width="match_parent"
+                android:layout_height="45sp"
+                android:hint="Type your age" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEditText_location"
+                android:layout_width="match_parent"
+                android:layout_height="45sp"
+                android:hint="Type your location (Country, county)" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEditText_aboutYou"
+                android:layout_width="match_parent"
+                android:layout_height="60sp"
+                android:hint="Write something about yourself" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEditText_adoptionMotivation"
+                android:layout_width="match_parent"
+                android:layout_height="90sp"
+                android:hint="Why do you want to adopt this pet?" />
+
+            <Button
+                android:id="@+id/button_send"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Send mail" />
+
+            <Button
+                android:id="@+id/button_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cancel" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
