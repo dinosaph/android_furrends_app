@@ -21,7 +21,7 @@
         <SwitchPreferenceCompat
             app:key="toolbar"
             app:title="Hide Furrends toolbar"
-            app:summary="Hides Furrends toolbar on main activity"
+            app:summary="Hides Furrends toolbar on all activities."
             />
 
     </PreferenceCategory>
