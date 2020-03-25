@@ -4,14 +4,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.preference.PreferenceManager;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +32,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     ListView listView;
+    Toolbar toolbar;
     String[] hamNames = {"Lil Ham", "Jack Sparrow", "Ninja", "Woof", "Speedy", "Sushi"};
     String[] hamDetails = {
             "- 1 month old\n- Campbell\n- gray\n- always wants to play\n- very friendly with humans\n- food is its best friend\n- take care, hamsters can become obese",
@@ -48,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
+        toolbar = findViewById(R.id.toolbar);
         listView = findViewById(R.id.listView);
         registerForContextMenu(listView);
 
@@ -67,7 +73,36 @@ public class MainActivity extends AppCompatActivity {
 
         checkedDonations = new boolean[hamDonateChoices.length];
 
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        Boolean hiddenToolbar = sharedPreferences.getBoolean("toolbar", false);
+
+        if (hiddenToolbar) {
+            toolbar.setVisibility(View.GONE);
+        }
+
+        Log.d("MainActivity", "Showing toolbar: " + hiddenToolbar);
         Log.d("MainActivity", "onCreate");
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -245,4 +280,5 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog donateDialog = mBuilder.create();
         donateDialog.show();
     }
+
 }

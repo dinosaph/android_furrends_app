@@ -22,7 +22,7 @@
             android:orientation="vertical">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar2"
+                android:id="@+id/toolbar"
                 android:layout_width="738dp"
                 android:layout_height="121dp"
                 android:background="#7CDD6D"
@@ -45,7 +45,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/toolbar2"
+                app:layout_constraintTop_toTopOf="@id/toolbar"
                 tools:srcCompat="@tools:sample/avatars[3]" />
 
             <TextView
