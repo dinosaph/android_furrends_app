@@ -37,5 +37,4 @@
         android:paddingRight="10sp"
         android:textSize="20sp" />
 
-
 </LinearLayout>

@@ -4,7 +4,11 @@
     <item
         android:id="@+id/action_settings"
         android:title="Settings"
-        android:orderInCategory="100"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/action_info"
+        android:title="App info"
         app:showAsAction="never"
         />
 </menu>
