@@ -7,6 +7,8 @@ import androidx.core.content.ContextCompat;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -17,12 +19,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.List;
-
 public class AppInfoActivity extends AppCompatActivity {
 
     double latitude;
     double longitude;
+    Sensor mSensor;
+    SensorManager sensorManager;
     int MY_LOCATION_PERMISSION;
 
     @Override
@@ -30,15 +32,25 @@ public class AppInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_info);
 
-        TextView dataTxtView = findViewById(R.id.sensorData);
+        final TextView sensorData = findViewById(R.id.sensorData);
+        sensorData.setText("-Accelerometer-");
 
-        SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        List<Sensor> sensors = sensorManager.getSensorList(Sensor.TYPE_ALL);
-        String dataTxt = new String();
-        for (Sensor sensor : sensors) {
-            dataTxt += sensor.getName() + " -> " + sensor.getPower() + "\n";
-        }
-        dataTxtView.setText(dataTxt);
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
+        SensorEventListener mSensorListener = new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent event) {
+                sensorData.setText("Accelerometer: " + event.values[0] + "(x axis) " + event.values[1] + "(y axis) " + event.values[2] + "(z axis)");
+                Log.d("ActivityAppInfo", event.toString());
+            }
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+            }
+        };
+
+        sensorManager.registerListener(mSensorListener, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
 
         final Button locationBtn = findViewById(R.id.action_location);
         final TextView locationData = findViewById(R.id.locationData);

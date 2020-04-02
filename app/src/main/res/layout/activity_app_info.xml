@@ -32,9 +32,8 @@
                 android:paddingLeft="15sp"
                 android:paddingTop="15sp"
                 android:paddingRight="15sp"
-                android:text="Sensors showing here"
-                android:textAlignment="textStart"
-                android:textSize="18sp" />
+                android:text="TextView"
+                android:textSize="18sp"/>
 
             <TextView
                 android:id="@+id/txt2"
